@@ -5,4 +5,5 @@ This is a demonstration app for JWTs. Backend GitHub repo: https://github.com/ll
 # Installation
 
 npm i
+
 npm run dev
