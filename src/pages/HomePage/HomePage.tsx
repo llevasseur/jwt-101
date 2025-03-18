@@ -1,15 +1,12 @@
 import AuthForm from "../../components/AuthForm/AuthForm";
-interface HomePageProps {
-  loggedIn: boolean;
-}
 
-const HomePage = ({ loggedIn }: HomePageProps) => {
+const HomePage = () => {
   return (
     <div>
-      <p>Logged In: {String(loggedIn)}</p>
+      <p>Logged In:</p>
       <AuthForm />
     </div>
   );
-}
+};
 
 export default HomePage;
