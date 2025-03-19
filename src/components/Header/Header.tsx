@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <div className="header-wrapper">
       <header className="header">
-        <h2 className="header__title">React Client</h2>
+        <h2 className="header__title">JWT 101</h2>
 
         <div className="header__nav">
           <nav className="nav">

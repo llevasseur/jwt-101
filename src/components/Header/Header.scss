@@ -3,6 +3,7 @@
 
 .header-wrapper {
   height: 3.125rem;
+  width: 100%;
   @include flex(row, flex-start, flex-start);
 }
 

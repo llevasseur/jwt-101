@@ -4,9 +4,16 @@
 
 #root {
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   min-width: 300px;
+  @include flex(column);
   @include desktop {
     max-width: $desktop;
   }
+}
+
+.main-content {
+  width: 100%;
+  flex: 1;
+  @include flex();
 }
