@@ -1,6 +1,5 @@
 import { useState, useEffect, FormEvent, ChangeEvent } from "react";
-import User from "../../types/User";
-import axios, { AxiosError, isAxiosError } from "axios";
+import axios, { isAxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import "./AuthForm.scss";
