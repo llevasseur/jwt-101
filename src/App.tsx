@@ -5,10 +5,8 @@ import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import ProtectedRoute from "./pages/ProtectedRoute/ProtectedRoute";
-import { useAuth } from "./context/AuthContext";
 
 const App = () => {
-  const { user } = useAuth();
   return (
     <BrowserRouter>
       <Header />
