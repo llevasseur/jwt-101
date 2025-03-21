@@ -56,13 +56,13 @@ const AuthForm = () => {
       return;
     }
     try {
-      const response = await axios.post(`${API_URL}/login`, inputs);
+      const response = await axios.post(`${API_URL}user/login`, inputs);
       const token = response.data.token;
 
       if (token) {
         localStorage.setItem("token", token);
 
-        const userResponse = await axios.get(`${API_URL}/user`, {
+        const userResponse = await axios.get(`${API_URL}user`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         login(userResponse.data.user);
@@ -83,7 +83,7 @@ const AuthForm = () => {
     const token = localStorage.getItem("token");
     const getUserData = async (token: string) => {
       try {
-        const response = await axios.get(`${API_URL}/user`, {
+        const response = await axios.get(`${API_URL}user`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         login(response.data);

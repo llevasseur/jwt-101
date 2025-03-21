@@ -3,14 +3,14 @@
 
 .header-wrapper {
   height: 3.125rem;
-  width: 100%;
+  width: 100vw;
+  background-color: rgb(202, 135, 119);
   @include flex(row, flex-start, flex-start);
 }
 
 .header {
   height: 100%;
   width: 100%;
-  background-color: rgb(202, 135, 119);
   @include flex(row, space-between);
 
   &__title {
