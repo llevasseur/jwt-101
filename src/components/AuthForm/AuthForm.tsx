@@ -71,11 +71,32 @@ const AuthForm = () => {
     } catch (err: unknown) {
       if (isAxiosError(err)) {
         console.error(err.message);
+        console.log(err);
+        let errorText;
+        switch (err.status) {
+          case 401:
+          case 404:
+            setErrors((prev: ErrorsType) => ({
+              ...prev,
+              password: "Password doesn't match",
+            }));
+            break;
+          case 403:
+            setErrors((prev: ErrorsType) => ({
+              ...prev,
+              password: "No JWT Provided",
+            }));
+            break;
+          case 498:
+          default:
+            errorText = "Error loggin in";
+        }
+      } else {
+        setErrors((prev: ErrorsType) => ({
+          ...prev,
+          server: "Error logging in",
+        }));
       }
-      setErrors((prev: ErrorsType) => ({
-        ...prev,
-        server: "Error logging in",
-      }));
     }
   };
 
