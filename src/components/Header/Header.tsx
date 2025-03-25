@@ -17,7 +17,7 @@ const Header = () => {
             </Link>
             {user ? (
               <>
-                <Link to="/" className="nav__link">
+                <Link to="/profile" className="nav__link">
                   Profile
                 </Link>
                 <button className="nav__link" onClick={logout}>
