@@ -29,13 +29,15 @@
   }
 
   &__button {
-    background-color: rgb(64, 208, 64);
+    background-color: $cta-green;
     padding: 0.5rem;
-    border: 1px solid black;
+    // border: 1px solid black;
     border-radius: 1rem;
     min-height: 20px;
     width: 100%;
     @include flex;
+    @include cta-hover;
+    @include cta-active;
   }
 }
 

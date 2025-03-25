@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import "./AuthForm.scss";
 import errorIcon from "../../assets/icons/error-24px.svg";
+import Cookies from "js-cookie";
+import setCookie from "../../utils/setCookie";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -18,7 +20,11 @@ interface ErrorsType {
   server?: string;
 }
 
-const AuthForm = () => {
+interface AuthFormProps {
+  isRegistered: boolean;
+}
+
+const AuthForm = ({ isRegistered = true }: AuthFormProps) => {
   const { login } = useAuth();
   const [inputs, setInputs] = useState<InputsType>({
     username: "",
@@ -60,7 +66,7 @@ const AuthForm = () => {
       const token = response.data.token;
 
       if (token) {
-        localStorage.setItem("token", token);
+        setCookie("token", token, 1);
 
         const userResponse = await axios.get(`${API_URL}user`, {
           headers: { Authorization: `Bearer ${token}` },
@@ -70,9 +76,6 @@ const AuthForm = () => {
       }
     } catch (err: unknown) {
       if (isAxiosError(err)) {
-        console.error(err.message);
-        console.log(err);
-        let errorText;
         switch (err.status) {
           case 401:
           case 404:
@@ -89,7 +92,10 @@ const AuthForm = () => {
             break;
           case 498:
           default:
-            errorText = "Error loggin in";
+            setErrors((prev: ErrorsType) => ({
+              ...prev,
+              server: "Error logging in",
+            }));
         }
       } else {
         setErrors((prev: ErrorsType) => ({
@@ -101,7 +107,7 @@ const AuthForm = () => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = Cookies.get("token");
     const getUserData = async (token: string) => {
       try {
         const response = await axios.get(`${API_URL}user`, {

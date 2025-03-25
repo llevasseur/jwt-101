@@ -1,5 +1,7 @@
 import { createContext, useState, ReactNode, useContext } from "react";
 import User from "../types/User";
+import Cookie from "js-cookie";
+import setCookie from "../utils/setCookie";
 
 interface AuthContextType {
   user: User | null;
@@ -17,13 +19,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const login = (userData: User) => {
     setUser(userData);
-    localStorage.setItem("user", JSON.stringify(userData));
+    setCookie("user", JSON.stringify(userData), 1);
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
+    Cookie.remove("user");
+    Cookie.remove("token");
   };
 
   return (
