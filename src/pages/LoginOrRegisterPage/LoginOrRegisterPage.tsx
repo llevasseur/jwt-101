@@ -1,4 +1,5 @@
-import AuthForm from "../../components/AuthForm/AuthForm";
+import LoginForm from "../../components/LoginForm/LoginForm";
+import RegisterForm from "../../components/RegisterForm/RegisterForm";
 import "./LoginOrRegisterPage.scss";
 import { useAuth } from "../../context/AuthContext";
 
@@ -13,22 +14,47 @@ const LoginOrRegisterPage = ({
   return (
     <div className="login-page">
       <div className="login-page__content">
-        <p>{user ? "Logged In" : "Logged Out"}</p>
-        {user ? (
-          <div className="logout-options">
-            <button
-              className="logout-options__btn logout-options__btn--green"
-              onClick={logout}
-            >
-              Switch Accounts
-            </button>
-            <button className="logout-options__btn" onClick={logout}>
-              Sign Out
-            </button>
-          </div>
+        {isRegistered ? (
+          <>
+            <p>Sign In</p>
+            {user ? (
+              <div className="logout-options">
+                <button
+                  className="logout-options__btn logout-options__btn--green"
+                  onClick={logout}
+                >
+                  Switch Accounts
+                </button>
+                <button className="logout-options__btn" onClick={logout}>
+                  Sign Out
+                </button>
+              </div>
+            ) : (
+              <>
+                <LoginForm />
+              </>
+            )}
+          </>
         ) : (
           <>
-            <AuthForm isRegistered={isRegistered} />
+            <p>Sign Up</p>
+            {user ? (
+              <div className="logout-options">
+                <button
+                  className="logout-options__btn logout-options__btn--green"
+                  onClick={logout}
+                >
+                  Switch Accounts
+                </button>
+                <button className="logout-options__btn" onClick={logout}>
+                  Sign Out
+                </button>
+              </div>
+            ) : (
+              <>
+                <RegisterForm />
+              </>
+            )}
           </>
         )}
       </div>

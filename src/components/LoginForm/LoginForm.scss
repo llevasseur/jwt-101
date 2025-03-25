@@ -7,8 +7,8 @@
   padding: 1rem 1.5rem 1.5rem 1.5rem;
   border: 1px solid black;
   border-radius: 1rem;
-  width: 80%;
-  max-width: 300px;
+  width: 100%;
+  max-width: 360px;
 
   &__input {
     border: 1px solid #ccc;
@@ -27,7 +27,12 @@
       box-shadow: 5px 4px 10px rgba(0, 0, 0, 0.1);
     }
   }
+}
 
+.form-cta {
+  @include flex(column);
+  width: 100%;
+  gap: 1rem;
   &__button {
     background-color: $cta-green;
     padding: 0.5rem;
@@ -52,5 +57,16 @@
 
   &__text {
     color: red;
+  }
+}
+
+.register-section {
+  width: 100%;
+  @include flex(row);
+  gap: 0.5rem;
+
+  &__link {
+    text-decoration: underline;
+    color: blue;
   }
 }

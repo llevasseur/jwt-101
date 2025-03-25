@@ -27,7 +27,7 @@ const Header = () => {
             ) : (
               <>
                 <Link className="nav__link" to="/login">
-                  Login
+                  Sign In
                 </Link>
               </>
             )}
