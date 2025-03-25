@@ -59,7 +59,59 @@ function RegisterForm() {
     if (!isFormValid()) {
       return;
     }
+    try {
+      const response = await axios.post(`${API_URL}user/register`, {
+        username: inputs.username,
+        password: inputs.password,
+      });
+      const token = response.data.token;
+
+      if (token) {
+        setCookie("token", token, 1);
+        const userResponse = await axios.get(`${API_URL}user`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        login(userResponse.data.user);
+        navigate("/profile");
+      }
+    } catch (err) {
+      if (isAxiosError(err)) {
+        switch (err.status) {
+          case 401:
+          case 404:
+            setErrors((prev: ErrorsType) => ({
+              ...prev,
+              password: "Password doesn't match",
+            }));
+            break;
+          case 403:
+            setErrors((prev: ErrorsType) => ({
+              ...prev,
+              password: "No JWT Provided",
+            }));
+            break;
+          case 409:
+            setErrors((prev: ErrorsType) => ({
+              ...prev,
+              username: "User already exists",
+            }));
+            break;
+          case 498:
+          default:
+            setErrors((prev: ErrorsType) => ({
+              ...prev,
+              server: "Error logging in",
+            }));
+        }
+      } else {
+        setErrors((prev: ErrorsType) => ({
+          ...prev,
+          server: "Error logging in",
+        }));
+      }
+    }
   };
+
   return (
     <form onSubmit={handleRegister} className="login-form">
       <div className="error-block">
@@ -119,7 +171,7 @@ function RegisterForm() {
         )}
       </div>
       <input
-        type="confirmPassword"
+        type="password"
         placeholder="confirm password"
         name="confirmPassword"
         onChange={handleInputChange}
