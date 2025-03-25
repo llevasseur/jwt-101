@@ -6,19 +6,11 @@ import "./AuthForm.scss";
 import errorIcon from "../../assets/icons/error-24px.svg";
 import Cookies from "js-cookie";
 import setCookie from "../../utils/setCookie";
+import LoginForm from "../LoginForm/LoginForm";
+import InputsType from "../../types/Inputs";
+import ErrorsType from "../../types/Errors";
 
 const API_URL = import.meta.env.VITE_API_URL;
-
-interface InputsType {
-  username: string;
-  password: string;
-}
-
-interface ErrorsType {
-  username?: string;
-  password?: string;
-  server?: string;
-}
 
 interface AuthFormProps {
   isRegistered: boolean;
@@ -127,66 +119,19 @@ const AuthForm = ({ isRegistered = true }: AuthFormProps) => {
     }
   }, []);
   return (
-    <form onSubmit={handleLogin} className="login-form">
-      <div className="error-block">
-        {errors.username && (
-          <>
-            <img
-              alt="error icon"
-              src={errorIcon}
-              className="error-block__icon"
-            />
-            <p className="error-block__text">{errors.username}</p>
-          </>
-        )}
-      </div>
-      <input
-        type="text"
-        name="username"
-        placeholder="username"
-        autoComplete="username"
-        onChange={handleInputChange}
-        value={inputs.username}
-        className="login-form__input"
-      />
-
-      <div className="error-block">
-        {errors.password && (
-          <>
-            <img
-              alt="error icon"
-              src={errorIcon}
-              className="error-block__icon"
-            />
-            <p className="error-block__text">{errors.password}</p>
-          </>
-        )}
-      </div>
-      <input
-        type="password"
-        placeholder="password"
-        name="password"
-        autoComplete="current-password"
-        onChange={handleInputChange}
-        value={inputs.password}
-        className="login-form__input"
-      />
-      <div className="error-block">
-        {errors.server && (
-          <>
-            <img
-              alt="error icon"
-              src={errorIcon}
-              className="error-block__icon"
-            />
-            <p className="error-block__text">{errors.server}</p>
-          </>
-        )}
-      </div>
-      <button type="submit" className="login-form__button">
-        Login
-      </button>
-    </form>
+    <>
+      {isRegistered ? (
+        <LoginForm
+          handleLogin={handleLogin}
+          errors={errors}
+          errorIcon={errorIcon}
+          handleInputChange={handleInputChange}
+          inputs={inputs}
+        />
+      ) : (
+        <></>
+      )}
+    </>
   );
 };
 
