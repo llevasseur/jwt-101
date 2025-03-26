@@ -24,9 +24,14 @@
 }
 
 .post-list {
-  outline: 1px solid black;
   flex: 1;
-  width: 100%;
-  border-radius: 1rem;
-  @include flex;
+  width: 80%;
+  min-width: 300px;
+  max-width: 700px;
+  @include flex(column, flex-start, flex-start);
+  flex-wrap: wrap;
+
+  &--no-posts {
+    @include flex(column, center, center);
+  }
 }

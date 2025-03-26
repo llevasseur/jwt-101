@@ -3,6 +3,7 @@ import { useAuth } from "../../context/AuthContext";
 import Cookies from "js-cookie";
 import axios, { isAxiosError } from "axios";
 import { Link } from "react-router-dom";
+import PostCard from "../../components/PostCard/PostCard";
 import "./ProfilePage.scss";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -59,22 +60,22 @@ function ProfilePage() {
           </div>
           <div className="posts">
             <h4>{user.username}'s Posts</h4>
-            <ul className="post-list">
-              {posts.length > 0 ? (
-                <>
+
+            {posts.length > 0 ? (
+              <>
+                <ul className="post-list">
                   {posts.map((post: PostType) => (
-                    <li className="post-list__item" key={post.id}>
-                      <div className="post-card">
-                        <h4 className="post-card__title">{post.title}</h4>
-                        <p className="post-card__body">{post.body}</p>
-                      </div>
+                    <li key={post.id}>
+                      <PostCard title={post.title} body={post.body} />
                     </li>
                   ))}
-                </>
-              ) : (
+                </ul>
+              </>
+            ) : (
+              <ul className="post-list post-list--no-posts">
                 <li>No Posts to show</li>
-              )}
-            </ul>
+              </ul>
+            )}
 
             <Link to="/profile/add-post" className="posts__add-btn">
               Add Post
