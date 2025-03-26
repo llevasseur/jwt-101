@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect, FormEvent, ChangeEvent } from "react";
+import { useState, useEffect, FormEvent, ChangeEvent, useRef } from "react";
 import axios, { isAxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
@@ -9,11 +9,14 @@ import Cookies from "js-cookie";
 import setCookie from "../../utils/setCookie";
 import InputsType from "../../types/Inputs";
 import ErrorsType from "../../types/Errors";
+import { Eye, EyeOff } from "lucide-react";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 function LoginForm() {
   const { login } = useAuth();
+  const usernameRef = useRef(null);
+  const passwordRef = useRef(null);
   const [inputs, setInputs] = useState<InputsType>({
     username: "",
     password: "",
@@ -23,6 +26,7 @@ function LoginForm() {
     password: "",
     server: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -113,6 +117,7 @@ function LoginForm() {
       getUserData(token);
     }
   }, []);
+
   return (
     <form onSubmit={handleLogin} className="login-form">
       <div className="error-block">
@@ -135,6 +140,7 @@ function LoginForm() {
         onChange={handleInputChange}
         value={inputs.username}
         className="login-form__input"
+        ref={usernameRef}
       />
 
       <div className="error-block">
@@ -149,15 +155,25 @@ function LoginForm() {
           </>
         )}
       </div>
-      <input
-        type="password"
-        placeholder="password"
-        name="password"
-        autoComplete="current-password"
-        onChange={handleInputChange}
-        value={inputs.password}
-        className="login-form__input"
-      />
+      <div className="password-block">
+        <input
+          type={showPassword ? "text" : "password"}
+          placeholder="password"
+          name="password"
+          autoComplete="current-password"
+          onChange={handleInputChange}
+          value={inputs.password}
+          className="login-form__input"
+          ref={passwordRef}
+        />
+        <button
+          type="button"
+          className="eye"
+          onClick={() => setShowPassword(!showPassword)}
+        >
+          {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+        </button>
+      </div>
       <div className="error-block">
         {errors.server && (
           <>

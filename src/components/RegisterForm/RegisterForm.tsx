@@ -7,6 +7,7 @@ import errorIcon from "../../assets/icons/error-24px.svg";
 import setCookie from "../../utils/setCookie";
 import InputsType from "../../types/Inputs";
 import ErrorsType from "../../types/Errors";
+import { Eye, EyeOff } from "lucide-react";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -23,6 +24,8 @@ function RegisterForm() {
     confirmPassword: "",
     server: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const navigate = useNavigate();
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -147,15 +150,24 @@ function RegisterForm() {
           </>
         )}
       </div>
-      <input
-        type="password"
-        placeholder="password"
-        name="password"
-        autoComplete="current-password"
-        onChange={handleInputChange}
-        value={inputs.password}
-        className="login-form__input"
-      />
+      <div className="password-block">
+        <input
+          type={showPassword ? "text" : "password"}
+          placeholder="password"
+          name="password"
+          autoComplete="new-password"
+          onChange={handleInputChange}
+          value={inputs.password}
+          className="login-form__input"
+        />
+        <button
+          type="button"
+          className="eye"
+          onClick={() => setShowPassword(!showPassword)}
+        >
+          {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+        </button>
+      </div>
 
       <div className="error-block">
         {errors.confirmPassword && (
@@ -169,14 +181,24 @@ function RegisterForm() {
           </>
         )}
       </div>
-      <input
-        type="password"
-        placeholder="confirm password"
-        name="confirmPassword"
-        onChange={handleInputChange}
-        value={inputs.confirmPassword}
-        className="login-form__input"
-      />
+
+      <div className="password-block">
+        <input
+          type={showConfirmPassword ? "text" : "password"}
+          placeholder="confirm password"
+          name="confirmPassword"
+          onChange={handleInputChange}
+          value={inputs.confirmPassword}
+          className="login-form__input"
+        />
+        <button
+          type="button"
+          className="eye"
+          onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+        >
+          {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+        </button>
+      </div>
       <div className="error-block">
         {errors.server && (
           <>

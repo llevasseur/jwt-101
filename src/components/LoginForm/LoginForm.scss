@@ -70,3 +70,15 @@
     color: blue;
   }
 }
+
+.password-block {
+  position: relative;
+  width: 100%;
+}
+
+.eye {
+  position: absolute;
+  right: 0.625rem;
+  top: 0.625rem;
+  color: grey;
+}
