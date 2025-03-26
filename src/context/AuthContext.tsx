@@ -37,7 +37,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   useEffect(() => {
-    console.log("late");
     const storedUser = Cookies.get("user");
 
     if (storedUser) {
