@@ -16,21 +16,24 @@ const LoginOrRegisterPage = ({
       <div className="login-page__content">
         {isRegistered ? (
           <>
-            <p>Sign In</p>
             {user ? (
-              <div className="logout-options">
-                <button
-                  className="logout-options__btn logout-options__btn--green"
-                  onClick={logout}
-                >
-                  Switch Accounts
-                </button>
-                <button className="logout-options__btn" onClick={logout}>
-                  Sign Out
-                </button>
-              </div>
+              <>
+                <p>Signed In</p>
+                <div className="logout-options">
+                  <button
+                    className="logout-options__btn logout-options__btn--green"
+                    onClick={logout}
+                  >
+                    Switch Accounts
+                  </button>
+                  <button className="logout-options__btn" onClick={logout}>
+                    Sign Out
+                  </button>
+                </div>
+              </>
             ) : (
               <>
+                <p>Sign In</p>
                 <LoginForm />
               </>
             )}

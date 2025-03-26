@@ -1,12 +1,19 @@
-import { createContext, useState, ReactNode, useContext } from "react";
+import {
+  createContext,
+  useState,
+  ReactNode,
+  useContext,
+  useEffect,
+} from "react";
 import User from "../types/User";
-import Cookie from "js-cookie";
+import Cookies from "js-cookie";
 import setCookie from "../utils/setCookie";
 
 interface AuthContextType {
   user: User | null;
   login: (userData: User) => void;
   logout: () => void;
+  loading: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -16,6 +23,7 @@ interface AuthProviderProps {
 }
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
 
   const login = (userData: User) => {
     setUser(userData);
@@ -24,13 +32,27 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const logout = () => {
     setUser(null);
-    Cookie.remove("user");
-    Cookie.remove("token");
+    Cookies.remove("user");
+    Cookies.remove("token");
   };
 
+  useEffect(() => {
+    console.log("late");
+    const storedUser = Cookies.get("user");
+
+    if (storedUser) {
+      try {
+        setUser(JSON.parse(storedUser));
+      } catch (err) {
+        console.error(`Error parsing stored user: ${err}`);
+      }
+    }
+    setLoading(false);
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
-      {children}
+    <AuthContext.Provider value={{ user, login, logout, loading }}>
+      {!loading ? children : <div>Loading...</div>}
     </AuthContext.Provider>
   );
 };

@@ -7,6 +7,7 @@ interface ProtectedRouteProps {
 
 function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { user } = useAuth();
+  console.log(user);
   // replace: boolean; replace current history entry and prevent users from going back to the previous Route
   return user ? children : <Navigate to="/login" replace />;
 }

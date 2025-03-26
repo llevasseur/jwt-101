@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect, FormEvent, ChangeEvent } from "react";
+import { useState, FormEvent, ChangeEvent } from "react";
 import axios, { isAxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import errorIcon from "../../assets/icons/error-24px.svg";
-import Cookies from "js-cookie";
 import setCookie from "../../utils/setCookie";
 import InputsType from "../../types/Inputs";
 import ErrorsType from "../../types/Errors";
