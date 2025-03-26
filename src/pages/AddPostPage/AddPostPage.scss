@@ -1,0 +1,13 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.add-post-page {
+  width: 100%;
+  height: 100%;
+  @include flex(column);
+}
+
+.title-block-pp {
+  width: 80%;
+  @include flex(row, flex-start);
+}

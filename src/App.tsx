@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import LoginOrRegisterPage from "./pages/LoginOrRegisterPage/LoginOrRegisterPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import ProtectedRoute from "./pages/ProtectedRoute/ProtectedRoute";
+import AddPostPage from "./pages/AddPostPage/AddPostPage";
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
               </ProtectedRoute>
             }
           />
+          <Route path="/profile/add-post" element={<ProtectedRoute><AddPostPage /></ProtectedRoute>} />
           <Route path="*" element={<h1>404 Not Found</h1>} />
         </Routes>
       </main>

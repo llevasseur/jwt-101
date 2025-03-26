@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
 import Cookies from "js-cookie";
 import axios, { isAxiosError } from "axios";
+import { Link } from "react-router-dom";
 import "./ProfilePage.scss";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -75,7 +76,9 @@ function ProfilePage() {
               )}
             </ul>
 
-            <button className="posts__add-btn">Add Post</button>
+            <Link to="/profile/add-post" className="posts__add-btn">
+              Add Post
+            </Link>
           </div>
         </>
       )}
