@@ -58,7 +58,6 @@ function PostForm() {
         { title: inputs.title, body: inputs.body },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      console.log(response);
       navigate("/profile");
     } catch (err: unknown) {
       if (isAxiosError(err)) {
