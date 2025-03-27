@@ -4,6 +4,8 @@ This is a demonstration app for JWTs. Backend GitHub repo: https://github.com/ll
 
 # Installation
 
+create .env based on .env.sample
+
 npm i
 
 npm run dev
