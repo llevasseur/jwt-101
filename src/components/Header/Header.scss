@@ -1,0 +1,39 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.header-wrapper {
+  height: 3.125rem;
+  width: 100vw;
+  background-color: rgb(202, 135, 119);
+  @include flex(row, flex-start, flex-start);
+}
+
+.header {
+  height: 100%;
+  width: 100%;
+  @include flex(row, space-between);
+
+  &__title {
+    padding: 0 0 0 1rem;
+  }
+
+  &__nav {
+    height: 100%;
+  }
+}
+
+.nav {
+  height: 100%;
+  @include flex(row, space-between);
+
+  &__link {
+    width: 6.25rem;
+    height: 100%;
+
+    @include flex;
+
+    &:hover {
+      background-color: rgb(154, 154, 154);
+    }
+  }
+}

@@ -1,0 +1,31 @@
+@use "./variables" as *;
+@mixin tablet {
+  @media screen and (max-width: $tablet) {
+    @content;
+  }
+}
+@mixin desktop {
+  @media screen and (min-width: $desktop) {
+    @content;
+  }
+}
+@mixin flex($dir: row, $just: center, $align: center) {
+  display: flex;
+  flex-direction: $dir;
+  justify-content: $just;
+  align-items: $align;
+}
+
+@mixin cta-hover {
+  &:hover {
+    outline: 1px solid rgb(215, 215, 215);
+    box-shadow: 5px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+}
+
+@mixin cta-active {
+  &:active {
+    outline: none;
+    box-shadow: none;
+  }
+}
